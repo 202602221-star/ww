@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101827">
+  <title>2026 Semiconductor Industry Newsroom</title>
+  <style>
+    :root {
+      --bg: #f3f6fb;
+      --surface: #ffffff;
+      --ink: #172033;
+      --muted: #5e6b80;
+      --navy: #101827;
+      --blue: #2459d3;
+      --blue-soft: #eaf0ff;
+      --teal: #087f8c;
+      --teal-soft: #e5f7f7;
+      --gold: #a75d00;
+      --gold-soft: #fff3df;
+      --line: #dce3ee;
+      --shadow: 0 14px 40px rgba(21, 36, 66, .08);
+      --radius: 20px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+    a { color: var(--blue); text-underline-offset: 3px; overflow-wrap: anywhere; }
+    a:focus-visible, button:focus-visible, input:focus-visible {
+      outline: 3px solid #f0a928;
+      outline-offset: 3px;
+    }
+    .topbar {
+      background: var(--navy);
+      color: #dce6ff;
+      padding: 12px 20px;
+      font-size: .88rem;
+    }
+    .topbar-inner, .container { width: min(1100px, calc(100% - 36px)); margin: 0 auto; }
+    .topbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .brand { font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .hero {
+      background:
+        radial-gradient(circle at 85% 20%, rgba(60, 120, 255, .36), transparent 28%),
+        radial-gradient(circle at 10% 100%, rgba(0, 205, 190, .18), transparent 32%),
+        var(--navy);
+      color: white;
+      padding: clamp(48px, 8vw, 92px) 0 58px;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid rgba(255,255,255,.24); border-radius: 999px;
+      padding: 6px 12px; color: #d7e4ff; font-size: .82rem; font-weight: 700;
+      letter-spacing: .04em;
+    }
+    h1 { font-size: clamp(2.35rem, 6vw, 4.8rem); line-height: 1.04; letter-spacing: -.055em; max-width: 850px; margin: 22px 0 18px; }
+    .hero p { max-width: 720px; color: #d5deef; font-size: clamp(1rem, 2vw, 1.18rem); margin: 0; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 10px 24px; margin-top: 28px; color: #c2cde1; font-size: .9rem; }
+    .hero-meta strong { color: white; }
+    main { padding: 34px 0 70px; }
+    .intro {
+      display: grid; grid-template-columns: 1.4fr .8fr; gap: 18px; align-items: stretch; margin-top: -2px;
+    }
+    .panel, .fact, .term-card, .outlook-card, .source-card {
+      background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow);
+    }
+    .panel { padding: 25px; }
+    .panel h2, .section-heading h2 { margin: 0 0 10px; letter-spacing: -.025em; line-height: 1.2; }
+    .panel p { margin: 0; color: var(--muted); }
+    .quick-note { background: var(--blue-soft); border-color: #d7e2ff; }
+    .quick-note strong { color: #1d45a4; }
+    .section { margin-top: 52px; }
+    .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 18px; margin-bottom: 18px; }
+    .section-heading p { color: var(--muted); margin: 0; max-width: 540px; }
+    .kicker { color: var(--teal); font-size: .78rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; margin-bottom: 7px; }
+    .fact-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .fact { padding: 22px; position: relative; overflow: hidden; }
+    .fact:first-child { grid-column: 1 / -1; }
+    .fact-number { display: inline-grid; place-items: center; width: 38px; height: 38px; border-radius: 12px; background: var(--blue-soft); color: var(--blue); font-weight: 900; margin-bottom: 12px; }
+    .fact h3 { margin: 0 0 10px; font-size: 1.17rem; line-height: 1.35; }
+    .status { display: inline-flex; border-radius: 999px; padding: 4px 9px; font-size: .73rem; font-weight: 800; margin-bottom: 12px; }
+    .reported { color: #086d57; background: #e2f7ef; }
+    .forecast { color: #8b4b00; background: var(--gold-soft); }
+    .fact p { margin: 0 0 12px; }
+    .ko { padding-top: 10px; border-top: 1px solid var(--line); color: var(--muted); font-size: .95rem; }
+    .ko b { color: var(--ink); }
+    .source-mini { font-size: .83rem; color: var(--muted); margin-top: 12px; }
+    .source-mini a { font-weight: 700; }
+    .terms-wrap { background: #eaf0f8; border: 1px solid #d9e2f0; border-radius: var(--radius); padding: 20px; }
+    button {
+      border: 0; border-radius: 12px; padding: 12px 17px; font: inherit; font-weight: 800;
+      cursor: pointer; background: var(--blue); color: white; transition: transform .15s, background .15s;
+    }
+    button:hover { background: #1948b8; transform: translateY(-1px); }
+    .term-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 16px; }
+    .term-card { padding: 17px; box-shadow: none; }
+    .term-card h3 { margin: 0 0 5px; }
+    .term-card p { margin: 0 0 8px; color: var(--muted); }
+    .term-card .korean { color: var(--ink); font-size: .93rem; }
+    [hidden] { display: none !important; }
+    .outlook-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .outlook-card { padding: 23px; box-shadow: none; }
+    .outlook-card h3 { margin: 0 0 10px; }
+    .outlook-card ul { margin: 0; padding-left: 21px; }
+    .outlook-card li + li { margin-top: 8px; }
+    .growth { border-top: 5px solid var(--teal); }
+    .risk { border-top: 5px solid #d38a22; }
+    .outlook-ko { margin-top: 14px; padding-top: 13px; border-top: 1px solid var(--line); color: var(--muted); }
+    .sources { display: grid; gap: 12px; }
+    .source-card { display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: center; padding: 18px 20px; box-shadow: none; }
+    .source-card h3 { margin: 0 0 4px; font-size: 1rem; }
+    .source-card p { margin: 0; color: var(--muted); font-size: .9rem; }
+    .source-date { white-space: nowrap; color: var(--muted); font-size: .82rem; }
+    .method { padding: 20px; border-radius: var(--radius); background: var(--navy); color: #e4eafa; margin-top: 30px; }
+    .method h2 { margin: 0 0 8px; font-size: 1.1rem; }
+    .method p { margin: 0; color: #c7d2e7; font-size: .93rem; }
+    footer { background: #0b1220; color: #aebbd1; padding: 24px 0; font-size: .85rem; }
+    footer .container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px; }
+    .small { font-size: .88rem; color: var(--muted); }
+    @media (max-width: 720px) {
+      .intro, .fact-grid, .term-grid, .outlook-grid { grid-template-columns: 1fr; }
+      .fact:first-child { grid-column: auto; }
+      .section-heading { display: block; }
+      .section-heading p { margin-top: 8px; }
+      .source-card { grid-template-columns: 1fr; gap: 7px; }
+      .source-date { white-space: normal; }
+      .topbar-inner { align-items: flex-start; flex-direction: column; gap: 2px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">Student Newsroom · Technology</div>
+      <div>Research verified: October 14, 2026</div>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="container">
+      <span class="eyebrow">2026 INDUSTRY EXPLAINER</span>
+      <h1>Chips Power the AI Boom</h1>
+      <p>Your friendly guide to the global and South Korean semiconductor industry in 2026. What is growing, why does it matter, and what could happen next?</p>
+      <div class="hero-meta">
+        <span><strong>Created by:</strong> Your Name</span>
+        <span><strong>Coverage:</strong> Global + South Korea</span>
+        <span><strong>Reading time:</strong> 4 minutes</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="intro" aria-label="Introduction">
+      <div class="panel">
+        <div class="kicker">The big idea</div>
+        <h2>What is a semiconductor?</h2>
+        <p>A semiconductor is a tiny material used to make electronic chips. Chips help phones, cars, computers, and AI systems process information. In 2026, demand from AI data centers is a major reason the industry is growing.</p>
+        <p class="ko"><b>한국어:</b> 반도체는 전자 칩을 만드는 데 사용되는 작은 소재입니다. 반도체 칩은 휴대전화, 자동차, 컴퓨터, AI 시스템이 정보를 처리하도록 돕습니다. 2026년에는 AI 데이터센터의 수요가 산업 성장의 주요 원인입니다.</p>
+      </div>
+      <aside class="panel quick-note">
+        <div class="kicker">Read the numbers correctly</div>
+        <h2>Results ≠ forecasts</h2>
+        <p><strong>Reported result:</strong> something that already happened.</p>
+        <p style="margin-top:8px"><strong>Forecast:</strong> an estimate about what may happen in the future.</p>
+        <p class="ko" style="margin-top:12px"><b>한국어:</b> 실적은 이미 발생한 결과입니다. 전망치는 앞으로 일어날 수 있는 일을 예측한 수치입니다.</p>
+      </aside>
+    </section>
+
+    <section class="section" id="facts">
+      <div class="section-heading">
+        <div>
+          <div class="kicker">Research highlights</div>
+          <h2>5 key facts for 2026</h2>
+        </div>
+        <p>Each item shows whether the number is reported data or a future estimate. Open the original source to check the details.</p>
+      </div>
+
+      <div class="fact-grid">
+        <article class="fact">
+          <div class="fact-number">01</div><br>
+          <span class="status forecast">FORECAST · GLOBAL</span>
+          <h3>Global semiconductor revenue may pass US$1.3 trillion in 2026.</h3>
+          <p>Gartner forecast that worldwide semiconductor revenue will exceed <strong>US$1.3 trillion in 2026</strong>, with revenue growth of 64%. This is a forecast, not the final result for the whole year.</p>
+          <p class="ko"><b>한국어:</b> 가트너는 2026년 전 세계 반도체 매출이 1조 3천억 달러를 넘고, 매출이 64% 성장할 것으로 전망했습니다. 이는 연간 최종 실적이 아니라 전망치입니다.</p>
+          <div class="source-mini">Source: Gartner · Published April 8, 2026 · <a href="https://www.gartner.com/en/newsroom/press-releases/2026-04-08-gartner-forecasts-worldwide-semiconductor-revenue-to-exceed-us-dollars-one-point-3-trillion-in-2026" target="_blank" rel="noopener noreferrer">Read original forecast ↗</a></div>
+        </article>
+
+        <article class="fact">
+          <div class="fact-number">02</div><br>
+          <span class="status reported">REPORTED RESULT · GLOBAL</span>
+          <h3>Global chip sales reached US$159.7 billion in August 2026.</h3>
+          <p>The Semiconductor Industry Association reported worldwide sales of <strong>US$159.7 billion in August 2026</strong>. That was 8% higher than July 2026 and 144.3% higher than August 2025.</p>
+          <p class="ko"><b>한국어:</b> 미국 반도체산업협회는 2026년 8월 전 세계 반도체 매출이 1,597억 달러였다고 발표했습니다. 이는 2026년 7월보다 8%, 2025년 8월보다 144.3% 증가한 수치입니다.</p>
+          <div class="source-mini">Source: SIA · Published October 5, 2026 · <a href="https://www.semiconductors.org/category/press-releases/" target="_blank" rel="noopener noreferrer">Read original SIA release archive ↗</a></div>
+        </article>
+
+        <article class="fact">
+          <div class="fact-number">03</div><br>
+          <span class="status reported">REPORTED RESULT · SOUTH KOREA</span>
+          <h3>Korean semiconductor exports reached US$20.5 billion in January 2026.</h3>
+          <p>South Korea's Ministry of Trade, Industry and Resources reported semiconductor exports of <strong>US$20.5 billion in January 2026</strong>, up 102.7% compared with January 2025.</p>
+          <p class="ko"><b>한국어:</b> 한국 산업통상자원부는 2026년 1월 반도체 수출액이 205억 달러였다고 발표했습니다. 이는 2025년 1월보다 102.7% 증가한 수치입니다.</p>
+          <div class="source-mini">Source: MOTIR · Published February 3, 2026 · <a href="https://english.motir.go.kr/eng/article/EATCLdfa319ada/2495/view?bbsCdN=2&pageIndex=1" target="_blank" rel="noopener noreferrer">Read official release ↗</a></div>
+        </article>
+
+        <article class="fact">
+          <div class="fact-number">04</div><br>
+          <span class="status reported">REPORTED RESULT · COMPANY</span>
+          <h3>Samsung Electronics reported KRW 171.5 trillion in total revenue for Q2 2026.</h3>
+          <p>Samsung's total company revenue was <strong>KRW 171.5 trillion</strong> for April–June 2026. Its Device Solutions division, which includes semiconductors, grew sales by 56% compared with the previous quarter. Total company revenue is not the same as semiconductor-only revenue.</p>
+          <p class="ko"><b>한국어:</b> 삼성전자는 2026년 2분기 전체 매출이 171.5조 원이라고 발표했습니다. 반도체 사업을 포함하는 디바이스솔루션(DS) 부문의 매출은 전 분기보다 56% 증가했습니다. 전체 회사 매출과 반도체 부문 매출은 서로 다릅니다.</p>
+          <div class="source-mini">Source: Samsung Semiconductor Newsroom · Published July 30, 2026 · <a href="https://news.samsungsemiconductor.com/global/samsung-electronics-announces-second-quarter-2026-results/" target="_blank" rel="noopener noreferrer">Read company results ↗</a></div>
+        </article>
+
+        <article class="fact">
+          <div class="fact-number">05</div><br>
+          <span class="status forecast">FORECAST · MEMORY</span>
+          <h3>AI memory is expected to be a major growth driver.</h3>
+          <p>In its 2026 market outlook, SK hynix highlighted strong demand for DRAM, NAND, and especially high-bandwidth memory (HBM) as AI infrastructure expands. This is a company outlook, so it should be read as an expectation rather than a guaranteed result.</p>
+          <p class="ko"><b>한국어:</b> SK하이닉스는 2026년 시장 전망에서 AI 인프라 확대에 따라 DRAM, NAND, 특히 고대역폭 메모리(HBM)의 수요가 강할 것으로 내다봤습니다. 이는 회사의 전망이며 확정된 결과는 아닙니다.</p>
+          <div class="source-mini">Source: SK hynix Newsroom · Published January 5, 2026 · <a href="https://news.skhynix.com/en/2026-market-outlook-focus-on-the-hbm-led-memory-supercycle/" target="_blank" rel="noopener noreferrer">Read company outlook ↗</a></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="terms">
+      <div class="section-heading">
+        <div>
+          <div class="kicker">Mini glossary</div>
+          <h2>Four terms to know</h2>
+        </div>
+        <p>Tap the button to show or hide the definitions in English and Korean.</p>
+      </div>
+      <div class="terms-wrap">
+        <button id="termsButton" type="button" aria-expanded="false" aria-controls="termDefinitions">View Term Definitions</button>
+        <div id="termDefinitions" class="term-grid" hidden>
+          <article class="term-card">
+            <h3>1. AI semiconductor</h3>
+            <p>A chip designed to handle AI tasks, such as recognizing images or generating text.</p>
+            <p class="korean"><b>한국어:</b> 이미지 인식이나 글 생성처럼 AI 작업을 처리하도록 설계된 반도체입니다.</p>
+          </article>
+          <article class="term-card">
+            <h3>2. Memory semiconductor</h3>
+            <p>A chip that stores digital information for a short time or for long-term use. DRAM and NAND are examples.</p>
+            <p class="korean"><b>한국어:</b> 디지털 정보를 일시적으로 또는 장기간 저장하는 반도체입니다. DRAM과 NAND가 예입니다.</p>
+          </article>
+          <article class="term-card">
+            <h3>3. HBM (High-Bandwidth Memory)</h3>
+            <p>A type of memory built to move large amounts of data quickly. It is useful in powerful AI systems.</p>
+            <p class="korean"><b>한국어:</b> 많은 데이터를 빠르게 전달하도록 만든 메모리입니다. 고성능 AI 시스템에 유용합니다.</p>
+          </article>
+          <article class="term-card">
+            <h3>4. Semiconductor exports</h3>
+            <p>Chips and related semiconductor products sold from one country to customers in other countries.</p>
+            <p class="korean"><b>한국어:</b> 한 국가에서 다른 국가의 고객에게 판매하는 반도체와 관련 제품입니다.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="outlook">
+      <div class="section-heading">
+        <div>
+          <div class="kicker">What comes next?</div>
+          <h2>Industry outlook: opportunity and uncertainty</h2>
+        </div>
+      </div>
+      <div class="outlook-grid">
+        <article class="outlook-card growth">
+          <h3>🌱 Reasons for growth</h3>
+          <ul>
+            <li>AI companies need more computing power.</li>
+            <li>Data centers need AI processors and fast memory such as HBM.</li>
+            <li>South Korea has major memory-chip makers, including Samsung Electronics and SK hynix.</li>
+            <li>Cars, robots, and connected devices also need chips.</li>
+          </ul>
+          <p class="outlook-ko"><b>한국어:</b> AI 기업은 더 강력한 컴퓨팅 성능을 필요로 합니다. 데이터센터에는 AI 프로세서와 HBM 같은 빠른 메모리가 필요합니다. 한국에는 삼성전자와 SK하이닉스 같은 주요 메모리 반도체 기업이 있습니다. 자동차, 로봇, 연결 기기도 반도체를 사용합니다.</p>
+        </article>
+        <article class="outlook-card risk">
+          <h3>⚠️ Risks to watch</h3>
+          <ul>
+            <li>AI investment may slow if customers do not earn enough from AI services.</li>
+            <li>Memory prices can rise and fall quickly.</li>
+            <li>Trade rules and international tensions can affect supply chains.</li>
+            <li>Building advanced chip factories is expensive and takes time.</li>
+          </ul>
+          <p class="outlook-ko"><b>한국어:</b> AI 서비스가 충분한 수익을 내지 못하면 AI 투자가 둔화될 수 있습니다. 메모리 가격은 빠르게 오르거나 내릴 수 있습니다. 무역 규제와 국제 갈등은 공급망에 영향을 줄 수 있습니다. 첨단 반도체 공장을 짓는 데는 많은 비용과 시간이 필요합니다.</p>
+        </article>
+      </div>
+      <div class="panel" style="margin-top:16px">
+        <h3 style="margin-top:0">Bottom line</h3>
+        <p>The 2026 outlook is strong because AI is increasing demand for advanced chips and memory. But forecasts can change. We should compare new reports with actual results and check the date, unit, and original source before using a number.</p>
+        <p class="ko"><b>한국어:</b> AI가 첨단 칩과 메모리 수요를 늘리고 있어 2026년 전망은 긍정적입니다. 하지만 전망은 바뀔 수 있습니다. 수치를 사용할 때는 실제 실적과 새로운 전망을 비교하고, 발표 날짜와 단위, 원문 출처를 확인해야 합니다.</p>
+      </div>
+    </section>
+
+    <section class="section" id="sources">
+      <div class="section-heading">
+        <div>
+          <div class="kicker">Check the evidence</div>
+          <h2>Original sources</h2>
+        </div>
+        <p>These links lead to the organizations that published the data or forecast. Publication dates are listed beside each source.</p>
+      </div>
+      <div class="sources">
+        <article class="source-card">
+          <div>
+            <h3><a href="https://www.gartner.com/en/newsroom/press-releases/2026-04-08-gartner-forecasts-worldwide-semiconductor-revenue-to-exceed-us-dollars-one-point-3-trillion-in-2026" target="_blank" rel="noopener noreferrer">Gartner — Worldwide semiconductor revenue forecast</a></h3>
+            <p>Global revenue projection and expected growth for 2026.</p>
+          </div>
+          <div class="source-date">Published: April 8, 2026</div>
+        </article>
+        <article class="source-card">
+          <div>
+            <h3><a href="https://www.semiconductors.org/category/press-releases/" target="_blank" rel="noopener noreferrer">Semiconductor Industry Association — Press release archive</a></h3>
+            <p>Open the October 5, 2026 release, “Year-to-Date Global Semiconductor Sales Top $1 Trillion Through August.”</p>
+          </div>
+          <div class="source-date">Published: October 5, 2026</div>
+        </article>
+        <article class="source-card">
+          <div>
+            <h3><a href="https://english.motir.go.kr/eng/article/EATCLdfa319ada/2495/view?bbsCdN=2&pageIndex=1" target="_blank" rel="noopener noreferrer">South Korea MOTIR — January 2026 exports</a></h3>
+            <p>Official report on Korea's total exports and semiconductor exports.</p>
+          </div>
+          <div class="source-date">Published: February 3, 2026</div>
+        </article>
+        <article class="source-card">
+          <div>
+            <h3><a href="https://news.samsungsemiconductor.com/global/samsung-electronics-announces-second-quarter-2026-results/" target="_blank" rel="noopener noreferrer">Samsung Semiconductor Newsroom — Q2 2026 results</a></h3>
+            <p>Company revenue and business performance for April–June 2026.</p>
+          </div>
+          <div class="source-date">Published: July 30, 2026</div>
+        </article>
+        <article class="source-card">
+          <div>
+            <h3><a href="https://news.skhynix.com/en/2026-market-outlook-focus-on-the-hbm-led-memory-supercycle/" target="_blank" rel="noopener noreferrer">SK hynix Newsroom — 2026 memory market outlook</a></h3>
+            <p>Company outlook on AI memory, DRAM, NAND, and HBM.</p>
+          </div>
+          <div class="source-date">Published: January 5, 2026</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="method">
+      <h2>Research note</h2>
+      <p>Verified on October 14, 2026. Forecasts are estimates, not guarantees. Company-wide revenue is not the same as semiconductor-only revenue. For a school report, keep the year and unit with every number and check the original publication before submitting.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <span>2026 Semiconductor Industry Newsroom · Student research project</span>
+      <span>Simple English + 한국어 번역</span>
+    </div>
+  </footer>
+
+  <script>
+    const termsButton = document.getElementById('termsButton');
+    const termDefinitions = document.getElementById('termDefinitions');
+
+    termsButton.addEventListener('click', () => {
+      const isExpanded = termsButton.getAttribute('aria-expanded') === 'true';
+      termsButton.setAttribute('aria-expanded', String(!isExpanded));
+      termDefinitions.hidden = isExpanded;
+      termsButton.textContent = isExpanded ? 'View Term Definitions' : 'Hide Term Definitions';
+    });
+  </script>
+</body>
+</html>
